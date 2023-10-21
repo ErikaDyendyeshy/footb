@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:football/app_binding.dart';
+import 'package:football/firebase_options.dart';
 import 'package:football/modules/auth/auth_binding.dart';
 import 'package:football/modules/auth/auth_page.dart';
 import 'package:football/modules/main/main_binding.dart';
@@ -16,7 +17,8 @@ import 'modules/intro/intro_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform);
   runApp(
     GetMaterialApp(
       theme: darkTheme,
