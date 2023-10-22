@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'match_model.g.dart';
@@ -97,7 +96,7 @@ class ResultObject {
   final String result;
   final String goalsHome;
   final String goalsAway;
-  final int minute;
+  final dynamic minute;
   final String state;
   final int destinationValue;
   final String destinationDescription;

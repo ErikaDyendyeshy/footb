@@ -96,7 +96,7 @@ ResultObject _$ResultObjectFromJson(Map<String, dynamic> json) => ResultObject(
       result: json['result'] as String,
       goalsHome: json['goalsHome'] as String,
       goalsAway: json['goalsAway'] as String,
-      minute: json['minute'] as int,
+      minute: json['minute'],
       state: json['state'] as String,
       destinationValue: json['destinationValue'] as int,
       destinationDescription: json['destinationDescription'] as String,
