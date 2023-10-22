@@ -17,7 +17,6 @@ class ProfileController extends GetxController {
   final RxBool isNotification = false.obs;
   final RxBool isDarkTheme = true.obs;
 
-
   Rx<User?> firebaseUser = Rx<User?>(null);
   Rx<Map<String, dynamic>?> userData = Rx<Map<String, dynamic>?>(null);
 

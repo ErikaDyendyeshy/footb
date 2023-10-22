@@ -14,12 +14,11 @@ class AuthController extends GetxController {
   final RxBool isLogin = false.obs;
   final Rx<User?> _firebaseUser = Rx<User?>(null);
 
-
   final RxString errorMessage = ''.obs;
   final RxBool isLoading = false.obs;
 
-  AuthController(){
-   isLogin.value = Get.arguments ?? false;
+  AuthController() {
+    isLogin.value = Get.arguments ?? false;
   }
 
   @override
@@ -27,16 +26,6 @@ class AuthController extends GetxController {
     _firebaseUser.bindStream(_auth.authStateChanges());
     super.onInit();
   }
-
-  // void createUser(String email, String password, String name) async {
-  //   try {
-  //     UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
-  //         email: email, password: password);
-  //     _updateUserData(userCredential.user!, name);
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
 
   void _updateUserData(User user, String name) {
     FirebaseFirestore.instance.collection('users').doc(user.uid).set({
@@ -65,8 +54,6 @@ class AuthController extends GetxController {
     isLoading.value = false;
   }
 
-
-
   Future<void> signUpWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
@@ -87,7 +74,7 @@ class AuthController extends GetxController {
         Get.offAllNamed('/home');
       }
     } catch (e) {
-      print('Error details: $e'); // This will print the detailed error
+      print('Error details: $e');
       if (e is FirebaseAuthException) {
         errorMessage.value = e.message ?? 'Unknown error occurred.';
       } else {
@@ -95,11 +82,7 @@ class AuthController extends GetxController {
       }
       Get.snackbar('Error', errorMessage.value);
     }
-
   }
 
-
-
   User? get user => _firebaseUser.value;
-
 }
