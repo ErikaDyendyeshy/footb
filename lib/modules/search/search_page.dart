@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:football/modules/search/search_controller.dart';
-import 'package:football/widget/f_svg_icon_widget.dart';
 import 'package:football/widget/f_text_field_widget.dart';
 
 import 'package:get/get.dart';
@@ -13,6 +12,7 @@ class SearchPage extends GetView<SearchAppController> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
+        centerTitle: true,
         title: Text(
           'txt_search'.tr.capitalizeFirst!,
         ),

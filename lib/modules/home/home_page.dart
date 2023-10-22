@@ -14,6 +14,7 @@ class HomePage extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           title: Text('txt_home'.tr.capitalizeFirst!),
           elevation: 0,
         ),
@@ -27,16 +28,12 @@ class HomePage extends GetView<HomeController> {
               _calendar(),
               const SizedBox(height: 5),
               _list(),
+
             ],
           ),
         )
         //
-        // Center(
-        //   child: FButtonWidget(
-        //     text: 'Logout',
-        //     onPressed: () => controller.signOut(),
-        //   ),
-        // )
+
         );
   }
 
@@ -62,7 +59,9 @@ class HomePage extends GetView<HomeController> {
     return Expanded(
       child: Obx(
         () => controller.matchDetailList.isEmpty
-            ?  Center(child: Lottie.asset('assets/lottie/animation_lnupk0i3.json'),)
+            ? Center(
+                child: Lottie.asset('assets/lottie/animation_lnupk0i3.json'),
+              )
             : ListView.builder(
                 shrinkWrap: true,
                 itemCount: controller.matchDetailList.length,

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -8,24 +9,52 @@ class AuthController extends GetxController {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController userName = TextEditingController();
   final RxBool passwordObscured = true.obs;
   final RxBool isLogin = false.obs;
+  final Rx<User?> _firebaseUser = Rx<User?>(null);
+
 
   final RxString errorMessage = ''.obs;
   final RxBool isLoading = false.obs;
 
   AuthController(){
-   isLogin.value = Get.arguments;
+   isLogin.value = Get.arguments ?? false;
   }
 
+  @override
+  void onInit() {
+    _firebaseUser.bindStream(_auth.authStateChanges());
+    super.onInit();
+  }
+
+  // void createUser(String email, String password, String name) async {
+  //   try {
+  //     UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+  //         email: email, password: password);
+  //     _updateUserData(userCredential.user!, name);
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
+
+  void _updateUserData(User user, String name) {
+    FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+      'uid': user.uid,
+      'email': user.email,
+      'displayName': name,
+    });
+  }
 
   Future<void> signUp() async {
     isLoading.value = true;
     try {
-      await _auth.createUserWithEmailAndPassword(
+      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );
+      await Future.delayed(const Duration(seconds: 2));
+      _updateUserData(userCredential.user!, emailController.text);
       Get.offAllNamed('/main');
     } catch (e) {
       if (e is FirebaseAuthException) {
@@ -35,6 +64,8 @@ class AuthController extends GetxController {
     }
     isLoading.value = false;
   }
+
+
 
   Future<void> signUpWithGoogle() async {
     try {
@@ -47,15 +78,28 @@ class AuthController extends GetxController {
           idToken: googleAuth.idToken,
         );
 
-        await _auth.signInWithCredential(credential);
+        UserCredential userCredential = await _auth.signInWithCredential(credential);
+
+        if (userCredential.user != null) {
+          _updateUserData(userCredential.user!, googleUser.displayName ?? "No name");
+        }
 
         Get.offAllNamed('/home');
       }
     } catch (e) {
+      print('Error details: $e'); // This will print the detailed error
       if (e is FirebaseAuthException) {
         errorMessage.value = e.message ?? 'Unknown error occurred.';
-        Get.snackbar('Error', errorMessage.value);
+      } else {
+        errorMessage.value = 'An unexpected error occurred. Please try again later.';
       }
+      Get.snackbar('Error', errorMessage.value);
     }
+
   }
+
+
+
+  User? get user => _firebaseUser.value;
+
 }

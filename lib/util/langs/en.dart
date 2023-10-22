@@ -14,5 +14,7 @@ const Map<String, String> en = {
   'txt_favorites' : 'favorites',
   'txt_profile' : 'profile',
   'txt_search' : 'search',
-
+  'txt_name' : 'name',
+  'txt_write_your_name' : 'write your name',
+  'txt_the_list_is_empty_add_your_favorite_team_to_the_list' : 'The list is empty.\nAdd your favorite team to the list'
 };

@@ -40,11 +40,16 @@ dependencies:
   flutter_svg: ^1.0.0
   google_sign_in: ^6.1.5
   json_annotation: ^4.8.1
-  firebase_core: ^2.16.0
+  firebase_core: ^2.19.0
   firebase_auth: ^4.11.0
   lottie: ^2.3.2
   horizontal_week_calendar: ^0.0.11
   intl: ^0.18.1
+  file_picker: ^5.0.1
+  image_cropper: ^2.0.3
+  cloud_firestore: ^4.11.0
+
+
 
 
 
@@ -76,6 +81,7 @@ flutter:
   assets:
     - assets/icon/
     - assets/lottie/
+    - assets/image/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
