@@ -16,7 +16,9 @@ class AuthController extends GetxController {
   final RxBool isLoading = false.obs;
 
   AuthController() {
-    isLogin.value = Get.arguments ?? false;
+    if (Get.arguments != null) {
+      isLogin.value = Get.arguments;
+    }
   }
 
   @override

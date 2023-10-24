@@ -1,4 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:football/modules/auth/auth_binding.dart';
+import 'package:football/modules/auth/auth_page.dart';
 import 'package:get/get.dart';
 
 class IntroController extends GetxController {
@@ -25,15 +27,17 @@ class IntroController extends GetxController {
   }
 
   void openSignUpPage() {
-    Get.toNamed(
-      '/auth',
+    Get.to(
+      () => const AuthPage(),
+      binding: AuthBinding(),
       arguments: false,
     );
   }
 
   void openLoginPage() {
-    Get.toNamed(
-      '/auth',
+    Get.to(
+      () => const AuthPage(),
+      binding: AuthBinding(),
       arguments: true,
     );
   }
