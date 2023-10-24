@@ -4,6 +4,8 @@ import 'package:football/app_binding.dart';
 import 'package:football/firebase_options.dart';
 import 'package:football/modules/auth/auth_binding.dart';
 import 'package:football/modules/auth/auth_page.dart';
+import 'package:football/modules/detail_match/detail_match_binding.dart';
+import 'package:football/modules/detail_match/detail_match_page.dart';
 import 'package:football/modules/main/main_binding.dart';
 import 'package:football/modules/main/main_page.dart';
 import 'package:football/modules/search/search_binding.dart';
@@ -53,6 +55,11 @@ void main() async {
           name: '/search',
           page: () => const SearchPage(),
           binding: SearchBinding(),
+        ),
+        GetPage(
+          name: '/detail_match',
+          page: () =>  DetailMatchPage(),
+          binding: DetailMatchBinding(),
         ),
       ],
     ),

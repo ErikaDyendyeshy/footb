@@ -73,56 +73,59 @@ class HomePage extends GetView<HomeController> {
   }
 
   Widget _item(MatchDetail match) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      margin: const EdgeInsets.symmetric(vertical: 5),
-      width: Get.width,
-      height: 120,
-      decoration: BoxDecoration(
-        color: AppColors.darkGray2,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 2,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 60,
-                  width: 60,
-                  child: Image.network(match.homeClubImage ?? ''),
-                ),
-                const SizedBox(height: 10),
-                Text(match.homeClubName ?? '')
-              ],
+    return InkWell(
+      onTap: () => Get.toNamed('/detail_match', arguments: match),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        margin: const EdgeInsets.symmetric(vertical: 5),
+        width: Get.width,
+        height: 120,
+        decoration: BoxDecoration(
+          color: AppColors.darkGray2,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              flex: 2,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 60,
+                    width: 60,
+                    child: Image.network(match.homeClubImage ?? ''),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(match.homeClubName ?? '')
+                ],
+              ),
             ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Text(
-              match.result ?? '',
-              style: Get.theme.textTheme.headlineSmall,
-              textAlign: TextAlign.center,
+            Expanded(
+              flex: 1,
+              child: Text(
+                match.result ?? '',
+                style: Get.theme.textTheme.headlineSmall,
+                textAlign: TextAlign.center,
+              ),
             ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 60,
-                  width: 60,
-                  child: Image.network(match.awayClubImage ?? ''),
-                ),
-                const SizedBox(height: 10),
-                Text(match.awayClubName ?? '')
-              ],
+            Expanded(
+              flex: 2,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 60,
+                    width: 60,
+                    child: Image.network(match.awayClubImage ?? ''),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(match.awayClubName ?? '')
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

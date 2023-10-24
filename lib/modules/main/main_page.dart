@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:football/modules/favorites/favorites_binding.dart';
-import 'package:football/modules/favorites/favorites_page.dart';
 import 'package:football/modules/home/home_binding.dart';
 import 'package:football/modules/home/home_page.dart';
 import 'package:football/modules/main/main_controller.dart';
 import 'package:football/modules/main/widget/bottom_bar/app_bottom_bar.dart';
 import 'package:football/modules/profile/profile_binding.dart';
 import 'package:football/modules/profile/profile_page.dart';
+import 'package:football/modules/statistic/statistic_binding.dart';
+import 'package:football/modules/statistic/statistic_page.dart';
 import 'package:football/style/app_colors.dart';
 import 'package:get/get.dart';
 
@@ -65,9 +65,9 @@ class MainPage extends GetView<MainController> {
           ),  Navigator(
             onGenerateRoute: (routeSettings) {
               return GetPageRoute(
-                routeName: '/favorites',
-                page: () => const FavoritesPage(),
-                binding: FavoritesBinding(),
+                routeName: '/statistic',
+                page: () => const StatisticPage(),
+                binding: StatisticBinding(),
               );
             },
           )  ,

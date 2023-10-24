@@ -35,7 +35,7 @@ class AppBottomBar extends GetView<MainController> {
             ),
             _item(
               icon: 'icon_favorite',
-              title: 'txt_favorites'.tr.capitalizeFirst!,
+              title: 'txt_statistic'.tr.capitalizeFirst!,
               select: controller.selectedPageIndex.value == 1 ? true : false,
               onTap: () {
                 controller.selectedPageIndex.value = 1;

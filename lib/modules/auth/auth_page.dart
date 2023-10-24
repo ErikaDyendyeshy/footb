@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:football/modules/auth/auth_controller.dart';
 import 'package:football/style/app_colors.dart';
 import 'package:football/widget/f_button_widget.dart';
-import 'package:football/widget/f_divider_widget.dart';
-import 'package:football/widget/f_svg_icon_widget.dart';
 import 'package:football/widget/f_text_field_widget.dart';
 import 'package:get/get.dart';
 
@@ -94,26 +92,7 @@ class AuthPage extends GetView<AuthController> {
                   onPressed: () => controller.signUp(),
                 ),
               ),
-              const SizedBox(height: 32),
-              FDividerWidget(
-                type: DividerType.withText,
-                text: 'txt_or'.tr,
-              ),
-              const SizedBox(height: 32),
-              Obx(
-                () => FButtonWidget(
-                  leading: const FSVGIconWidget(icon: 'google'),
-                  loading: controller.isLoading.value,
-                  text: controller.isLogin.value
-                      ? 'txt_sign_in_with_google'.tr
-                      : 'txt_sign_up_with_google'.tr,
-                  onPressed: () => controller.signUpWithGoogle(),
-                  color: Get.theme.colorScheme.onPrimary,
-                  textStyle: Get.theme.textTheme.labelLarge!.copyWith(
-                    color: Get.theme.colorScheme.primary,
-                  ),
-                ),
-              ),
+
             ],
           ),
         ),

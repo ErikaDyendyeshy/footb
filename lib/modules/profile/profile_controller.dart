@@ -5,13 +5,11 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:football/modules/auth/auth_controller.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_cropper/image_cropper.dart';
 
 class ProfileController extends GetxController {
   final AuthController authController = Get.find<AuthController>();
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
   Rx<File?> avatarRx = Rx(null);
   final RxBool isLoading = false.obs;
   final RxBool isNotification = false.obs;
@@ -103,7 +101,6 @@ class ProfileController extends GetxController {
 
   Future<void> signOut() async {
     try {
-      await _googleSignIn.signOut();
       await _auth.signOut();
 
       Get.offAllNamed('/auth', arguments: true);
