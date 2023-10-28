@@ -15,7 +15,7 @@ class IntroController extends GetxController {
     _redirectToProperPage();
   }
 
-  void _redirectToProperPage() {
+  void _redirectToProperPage()  {
     currentUser.value = _auth.currentUser == null;
     Future.delayed(const Duration(seconds: 3), () {
       if (currentUser.value) {
@@ -28,15 +28,16 @@ class IntroController extends GetxController {
 
   void openSignUpPage() {
     Get.to(
-      () => const AuthPage(),
+      () =>  AuthPage(),
       binding: AuthBinding(),
       arguments: false,
     );
   }
 
   void openLoginPage() {
+
     Get.to(
-      () => const AuthPage(),
+      () =>  AuthPage(),
       binding: AuthBinding(),
       arguments: true,
     );

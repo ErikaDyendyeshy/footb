@@ -1,1 +1,1 @@
-const String apiUrl = 'https://transfermarket.p.rapidapi.com/';
+const String apiUrl = 'https://api-football-v1.p.rapidapi.com';

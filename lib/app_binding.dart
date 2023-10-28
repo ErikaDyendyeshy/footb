@@ -6,7 +6,7 @@ class AppBinding extends Bindings {
   @override
   void dependencies() {
     Get.put<ApiDataSource>(ApiDataSource(), permanent: true);
-    // Get.put(AuthController());
+    Get.lazyPut<AuthController>(() => AuthController(), fenix: true);
 
   }
 }

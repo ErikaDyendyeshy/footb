@@ -38,7 +38,7 @@ void main() async {
         ),
         GetPage(
           name: '/auth',
-          page: () => const AuthPage(),
+          page: () =>  AuthPage(),
           binding: AuthBinding(),
         ),
         GetPage(

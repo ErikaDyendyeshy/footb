@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:football/data/model/match_model.dart';
+import 'package:football/data/model/fixture_response/fixture_response.dart';
 import 'package:football/modules/home/home_controller.dart';
 import 'package:football/modules/home/widget/search_button_widget.dart';
 import 'package:football/style/app_colors.dart';
@@ -28,7 +28,6 @@ class HomePage extends GetView<HomeController> {
               _calendar(),
               const SizedBox(height: 5),
               _list(),
-
             ],
           ),
         )
@@ -40,7 +39,7 @@ class HomePage extends GetView<HomeController> {
   Widget _calendar() {
     return HorizontalWeekCalendar(
       onDateChange: (date) {
-        controller.fetchMatches(date);
+        controller.fetchMatches(date: date);
       },
       weekStartFrom: WeekStartFrom.Monday,
       activeBackgroundColor: Get.theme.colorScheme.primary,
@@ -58,23 +57,23 @@ class HomePage extends GetView<HomeController> {
   Widget _list() {
     return Expanded(
       child: Obx(
-        () => controller.matchDetailList.isEmpty
+        () => controller.fixtures.isEmpty
             ? Center(
                 child: Lottie.asset('assets/lottie/animation_lnupk0i3.json'),
               )
             : ListView.builder(
                 shrinkWrap: true,
-                itemCount: controller.matchDetailList.length,
+                itemCount: controller.fixtures.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return _item(controller.matchDetailList[index]);
+                  return _item(controller.fixtures[index]);
                 }),
       ),
     );
   }
 
-  Widget _item(MatchDetail match) {
+  Widget _item(FixtureItem match) {
     return InkWell(
-      onTap: () => Get.toNamed('/detail_match', arguments: match),
+      onTap: () => Get.toNamed('/detail_match', arguments: match.fixture.id),
       child: Container(
         padding: const EdgeInsets.all(16),
         margin: const EdgeInsets.symmetric(vertical: 5),
@@ -91,22 +90,48 @@ class HomePage extends GetView<HomeController> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
+                  Container(
+                    padding: const EdgeInsets.all(8),
                     height: 60,
                     width: 60,
-                    child: Image.network(match.homeClubImage ?? ''),
+                    decoration: BoxDecoration(
+                        color: AppColors.white, borderRadius: BorderRadius.circular(50)),
+                    child: Image.network(match.teams.home!.logo ?? ''),
                   ),
                   const SizedBox(height: 10),
-                  Text(match.homeClubName ?? '')
+                  Flexible(
+                      child: Text(
+                    match.teams.home!.name,
+                    textAlign: TextAlign.center,
+                  ))
                 ],
               ),
             ),
             Expanded(
               flex: 1,
-              child: Text(
-                match.result ?? '',
-                style: Get.theme.textTheme.headlineSmall,
-                textAlign: TextAlign.center,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    match.score!.fulltime!.home == null
+                        ? '-'
+                        : match.score!.fulltime!.home.toString(),
+                    style: Get.theme.textTheme.headlineSmall,
+                    textAlign: TextAlign.center,
+                  ),
+                  if (match.score!.fulltime!.home != null)
+                    Text(
+                      ' - ',
+                      style: Get.theme.textTheme.headlineSmall,
+                    ),
+                  Text(
+                    match.score!.fulltime!.away == null
+                        ? '-'
+                        : match.score!.fulltime!.away.toString(),
+                    style: Get.theme.textTheme.headlineSmall,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ),
             ),
             Expanded(
@@ -114,13 +139,23 @@ class HomePage extends GetView<HomeController> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
+                  Container(
+                    padding: const EdgeInsets.all(8),
                     height: 60,
                     width: 60,
-                    child: Image.network(match.awayClubImage ?? ''),
+                    decoration: BoxDecoration(
+                      color: AppColors.white,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    child: Image.network(match.teams.away!.logo ?? ''),
                   ),
                   const SizedBox(height: 10),
-                  Text(match.awayClubName ?? '')
+                  Flexible(
+                    child: Text(
+                      match.teams.away!.name,
+                      textAlign: TextAlign.center,
+                    ),
+                  )
                 ],
               ),
             ),

@@ -16,8 +16,8 @@ class StatisticController extends GetxController {
   void fetchUefaRanking() async {
     try {
       isLoading(true);
-      final ranking = await _apiDataSource.fetchDataFromAPI();
-      uefaRanking.value = ranking;
+      // final ranking = await _apiDataSource.fetchDataFromAPI();
+      // uefaRanking.value = ranking;
     } finally {
       isLoading(false);
     }

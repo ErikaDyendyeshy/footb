@@ -21,7 +21,7 @@ GameInformationModel _$GameInformationModelFromJson(
       competitionRound: json['competitionRound'] as String,
       competitionImage: json['competitionImage'] as String,
       nationalTeamFlag: json['nationalTeamFlag'] as bool,
-      refereeID: json['refereeID'] as dynamic,
+      refereeID: json['refereeID'],
       refereeName: json['refereeName'] as String,
       refereeImage: json['refereeImage'] as String,
       homeTeamID: json['homeTeamID'] as String,

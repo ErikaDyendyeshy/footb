@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:football/modules/intro/intro_controller.dart';
+import 'package:football/style/app_colors.dart';
 import 'package:football/widget/f_button_widget.dart';
+import 'package:football/widget/f_svg_icon_widget.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -15,49 +17,12 @@ class IntroPage extends GetView<IntroController> {
           if (controller.isShowButtons.value) {
             return Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Obx(
-                () => AnimatedContainer(
-                  duration: const Duration(milliseconds: 600),
-                  height: controller.currentUser.value ? 300 : 200,
-                  onEnd: () {
-                    if (controller.currentUser.value) {
-                      Future.delayed(const Duration(milliseconds: 10), () {
-                        controller.isShowButtons.value = true;
-                      });
-                    } else {
-                      controller.isShowButtons.value = false;
-                    }
-                  },
-                  child: AnimatedOpacity(
-                    opacity: controller.isShowButtons.value ? 1.0 : 0.0,
-                    duration: const Duration(milliseconds: 300),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          'SPORT',
-                          style: Get.theme.textTheme.headlineLarge!.copyWith(
-                            fontSize: 60,
-                          ),
-                        ),
-                        const SizedBox(height: 100),
-                        FButtonWidget(
-                          text: 'txt_sign_up'.tr.capitalizeFirst!,
-                          onPressed: controller.openSignUpPage,
-                        ),
-                        const SizedBox(height: 20),
-                        FButtonWidget(
-                          color: Get.theme.colorScheme.onPrimary,
-                          textStyle: Get.theme.textTheme.labelLarge!.copyWith(
-                            color: Get.theme.colorScheme.primary,
-                          ),
-                          text: 'txt_login'.tr.capitalizeFirst!,
-                          onPressed: controller.openLoginPage,
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _logo(),
+                  _buttons(),
+                ],
               ),
             );
           } else {
@@ -65,6 +30,47 @@ class IntroPage extends GetView<IntroController> {
           }
         }),
       ),
+    );
+  }
+
+  Widget _logo() {
+    return Column(
+      children: [
+        const FSVGIconWidget(
+          icon: 'logo',
+          height: 130,
+          color: AppColors.gray200,
+        ),
+        Flexible(
+          child: Text(
+            'MATCHVIEW',
+            style: Get.theme.textTheme.headlineLarge!.copyWith(
+              fontSize: 55,
+            ),
+          ),
+        ),
+        const SizedBox(height: 100),
+      ],
+    );
+  }
+
+  Widget _buttons() {
+    return Column(
+      children: [
+        FButtonWidget(
+          text: 'txt_sign_up'.tr.capitalizeFirst!,
+          onPressed: controller.openSignUpPage,
+        ),
+        const SizedBox(height: 20),
+        FButtonWidget(
+          color: Get.theme.colorScheme.onPrimary,
+          textStyle: Get.theme.textTheme.labelLarge!.copyWith(
+            color: Get.theme.colorScheme.primary,
+          ),
+          text: 'txt_login'.tr.capitalizeFirst!,
+          onPressed: controller.openLoginPage,
+        )
+      ],
     );
   }
 }

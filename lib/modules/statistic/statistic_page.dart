@@ -15,7 +15,7 @@ class StatisticPage extends GetView<StatisticController> {
         elevation: 0,
         title: const Text('Statistic'),
       ),
-      body: _body(),
+      body: SizedBox(),
     );
   }
 

@@ -17,7 +17,7 @@ class AuthController extends GetxController {
 
   AuthController() {
     if (Get.arguments != null) {
-      isLogin.value = Get.arguments;
+      isLogin.value = Get.arguments as bool;
     }
   }
 
@@ -41,6 +41,7 @@ class AuthController extends GetxController {
       UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
+
       );
       await Future.delayed(const Duration(seconds: 2));
       _updateUserData(userCredential.user!, emailController.text);
@@ -53,6 +54,25 @@ class AuthController extends GetxController {
     }
     isLoading.value = false;
   }
+
+  Future<void> signIn() async {
+    isLoading.value = true;
+    try {
+   await _auth.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      await Future.delayed(const Duration(seconds: 2));
+      Get.offAllNamed('/main');
+    } catch (e) {
+      if (e is FirebaseAuthException) {
+        errorMessage.value = e.message ?? 'Unknown error occurred.';
+        Get.snackbar('Error', errorMessage.value);
+      }
+    }
+    isLoading.value = false;
+  }
+
 
   User? get user => _firebaseUser.value;
 }
