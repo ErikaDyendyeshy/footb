@@ -67,7 +67,7 @@ class AuthController extends GetxController {
     } catch (e) {
       if (e is FirebaseAuthException) {
         errorMessage.value = e.message ?? 'Unknown error occurred.';
-        Get.snackbar('Error', errorMessage.value);
+        Get.snackbar('Error', 'Invalid login credentials');
       }
     }
     isLoading.value = false;

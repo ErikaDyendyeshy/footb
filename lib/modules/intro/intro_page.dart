@@ -18,7 +18,7 @@ class IntroPage extends GetView<IntroController> {
             return Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
-                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   _logo(),
                   _buttons(),
@@ -35,6 +35,7 @@ class IntroPage extends GetView<IntroController> {
 
   Widget _logo() {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         const FSVGIconWidget(
           icon: 'logo',
@@ -56,6 +57,8 @@ class IntroPage extends GetView<IntroController> {
 
   Widget _buttons() {
     return Column(
+      mainAxisSize: MainAxisSize.min,
+
       children: [
         FButtonWidget(
           text: 'txt_sign_up'.tr.capitalizeFirst!,
