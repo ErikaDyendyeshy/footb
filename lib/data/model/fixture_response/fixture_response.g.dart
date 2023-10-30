@@ -373,12 +373,12 @@ Map<String, dynamic> _$PlayerStatisticToJson(PlayerStatistic instance) =>
     };
 
 Games _$GamesFromJson(Map<String, dynamic> json) => Games(
-      minutes: json['minutes'] as int,
-      number: json['number'] as int,
-      position: json['position'] as String,
-      rating: json['rating'] as String,
-      captain: json['captain'] as bool,
-      substitute: json['substitute'] as bool,
+      minutes: json['minutes'] as int?,
+      number: json['number'] as int?,
+      position: json['position'] as String?,
+      rating: json['rating'] as String?,
+      captain: json['captain'] as bool?,
+      substitute: json['substitute'] as bool?,
     );
 
 Map<String, dynamic> _$GamesToJson(Games instance) => <String, dynamic>{
@@ -391,8 +391,8 @@ Map<String, dynamic> _$GamesToJson(Games instance) => <String, dynamic>{
     };
 
 Shots _$ShotsFromJson(Map<String, dynamic> json) => Shots(
-      total: json['total'] as int,
-      on: json['on'] as int,
+      total: json['total'] as int?,
+      on: json['on'] as int?,
     );
 
 Map<String, dynamic> _$ShotsToJson(Shots instance) => <String, dynamic>{
@@ -416,9 +416,9 @@ Map<String, dynamic> _$GoalsPlayerToJson(GoalsPlayer instance) =>
     };
 
 Passes _$PassesFromJson(Map<String, dynamic> json) => Passes(
-      total: json['total'] as int,
-      key: json['key'] as int,
-      accuracy: json['accuracy'] as String,
+      total: json['total'] as int?,
+      key: json['key'] as int?,
+      accuracy: json['accuracy'] as String?,
     );
 
 Map<String, dynamic> _$PassesToJson(Passes instance) => <String, dynamic>{
@@ -429,8 +429,8 @@ Map<String, dynamic> _$PassesToJson(Passes instance) => <String, dynamic>{
 
 Tackles _$TacklesFromJson(Map<String, dynamic> json) => Tackles(
       total: json['total'] as int?,
-      blocks: json['blocks'] as int,
-      interceptions: json['interceptions'] as int,
+      blocks: json['blocks'] as int?,
+      interceptions: json['interceptions'] as int?,
     );
 
 Map<String, dynamic> _$TacklesToJson(Tackles instance) => <String, dynamic>{
@@ -440,8 +440,8 @@ Map<String, dynamic> _$TacklesToJson(Tackles instance) => <String, dynamic>{
     };
 
 Duels _$DuelsFromJson(Map<String, dynamic> json) => Duels(
-      total: json['total'] as int,
-      won: json['won'] as int,
+      total: json['total'] as int?,
+      won: json['won'] as int?,
     );
 
 Map<String, dynamic> _$DuelsToJson(Duels instance) => <String, dynamic>{
@@ -450,8 +450,8 @@ Map<String, dynamic> _$DuelsToJson(Duels instance) => <String, dynamic>{
     };
 
 Dribbles _$DribblesFromJson(Map<String, dynamic> json) => Dribbles(
-      attempts: json['attempts'] as int,
-      success: json['success'] as int,
+      attempts: json['attempts'] as int?,
+      success: json['success'] as int?,
       past: json['past'] as int?,
     );
 
@@ -462,8 +462,8 @@ Map<String, dynamic> _$DribblesToJson(Dribbles instance) => <String, dynamic>{
     };
 
 Fouls _$FoulsFromJson(Map<String, dynamic> json) => Fouls(
-      drawn: json['drawn'] as int,
-      committed: json['committed'] as int,
+      drawn: json['drawn'] as int?,
+      committed: json['committed'] as int?,
     );
 
 Map<String, dynamic> _$FoulsToJson(Fouls instance) => <String, dynamic>{
@@ -484,9 +484,9 @@ Map<String, dynamic> _$CardsToJson(Cards instance) => <String, dynamic>{
 Penalty _$PenaltyFromJson(Map<String, dynamic> json) => Penalty(
       won: json['won'] as int?,
       committed: json['committed'] as int?,
-      scored: json['scored'] as int,
-      missed: json['missed'] as int,
-      saved: json['saved'] as int,
+      scored: json['scored'] as int?,
+      missed: json['missed'] as int?,
+      saved: json['saved'] as int?,
     );
 
 Map<String, dynamic> _$PenaltyToJson(Penalty instance) => <String, dynamic>{

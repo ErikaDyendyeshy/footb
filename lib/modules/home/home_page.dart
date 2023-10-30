@@ -1,10 +1,10 @@
+import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:football/data/model/fixture_response/fixture_response.dart';
 import 'package:football/modules/home/home_controller.dart';
 import 'package:football/modules/home/widget/search_button_widget.dart';
 import 'package:football/style/app_colors.dart';
 import 'package:get/get.dart';
-import 'package:horizontal_week_calendar/horizontal_week_calendar.dart';
 import 'package:lottie/lottie.dart';
 
 class HomePage extends GetView<HomeController> {
@@ -37,20 +37,46 @@ class HomePage extends GetView<HomeController> {
   }
 
   Widget _calendar() {
-    return HorizontalWeekCalendar(
-      onDateChange: (date) {
-        controller.fetchMatches(date: date);
+    return EasyDateTimeLine(
+      initialDate: DateTime.now(),
+      onDateChange: (selectedDate) {
+        controller.fetchMatches(date: selectedDate);
       },
-      weekStartFrom: WeekStartFrom.Monday,
-      activeBackgroundColor: Get.theme.colorScheme.primary,
-      activeTextColor: Colors.white,
-      inactiveBackgroundColor: Colors.transparent,
-      inactiveTextColor: Colors.white,
-      disabledTextColor: Colors.grey,
-      disabledBackgroundColor: Colors.transparent,
-      activeNavigatorColor: Get.theme.colorScheme.primary,
-      inactiveNavigatorColor: AppColors.gray400,
-      monthColor: Get.theme.colorScheme.primary,
+      activeColor: AppColors.primary,
+      headerProps: const EasyHeaderProps(
+        selectedDateFormat: SelectedDateFormat.monthOnly,
+        selectedDateStyle: TextStyle(
+          color: AppColors.white,
+        ),
+      ),
+      dayProps: EasyDayProps(
+        height: 48.0,
+        width: 48.0,
+        dayStructure: DayStructure.dayNumDayStr,
+        todayStyle: const DayStyle(
+          dayNumStyle: TextStyle(color: AppColors.white, fontSize: 18),
+          borderRadius: 48.0,
+
+        ),
+        inactiveDayStyle: DayStyle(
+          borderRadius: 48.0,
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.transparent,
+            ),
+          ),
+          dayNumStyle: const TextStyle(
+            fontSize: 18.0,
+          ),
+        ),
+        activeDayStyle: const DayStyle(
+          borderRadius: 48.0,
+          dayNumStyle: TextStyle(
+            fontSize: 18.0,
+
+          ),
+        ),
+      ),
     );
   }
 
@@ -95,7 +121,9 @@ class HomePage extends GetView<HomeController> {
                     height: 60,
                     width: 60,
                     decoration: BoxDecoration(
-                        color: AppColors.white, borderRadius: BorderRadius.circular(50)),
+                      color: AppColors.white,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
                     child: Image.network(match.teams.home!.logo ?? ''),
                   ),
                   const SizedBox(height: 10),
@@ -121,7 +149,7 @@ class HomePage extends GetView<HomeController> {
                   ),
                   if (match.score!.fulltime!.home != null)
                     Text(
-                      ' - ',
+                      ' : ',
                       style: Get.theme.textTheme.headlineSmall,
                     ),
                   Text(

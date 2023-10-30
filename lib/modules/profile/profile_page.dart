@@ -115,7 +115,7 @@ class ProfilePage extends GetView<ProfileController> {
             ),
           ),
           Text(
-            controller.userData.value?['name'] ?? 'No name',
+            controller.userData.value?['displayName'] ?? 'No name',
             style: Get.theme.textTheme.titleMedium,
           ),
         ],

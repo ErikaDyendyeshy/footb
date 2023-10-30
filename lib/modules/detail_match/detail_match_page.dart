@@ -1,5 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'package:football/modules/detail_match/detail_match_controller.dart';
+import 'package:football/style/app_colors.dart';
 import 'package:get/get.dart';
 
 class DetailMatchPage extends GetView<DetailMatchController> {
@@ -9,148 +11,163 @@ class DetailMatchPage extends GetView<DetailMatchController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Fixture Details'),
+          title: const Text('Details'),
+          elevation: 0,
         ),
         body: Obx(
-          () => controller.fixtureRx.value == null
+          () => controller.isLoading.value
               ? const CircularProgressIndicator()
-              : ListView(padding: const EdgeInsets.all(16.0), children: [
-                  Text('Fixture ID: ${controller.fixtureRx.value!.fixture.id}'),
-                  Text('League Name: ${controller.fixtureRx.value!.league.name}'),
-                  Divider(),
-                  Text('Home Team: ${controller.fixtureRx.value!.teams.home!.name}'),
-                  Text('Away Team: ${controller.fixtureRx.value!.teams.away!.name}'),
-                  Divider(),
-                  Text('Goals Home: ${controller.fixtureRx.value!.goals.home}'),
-                  Text('Goals Away: ${controller.fixtureRx.value!.goals.away}'),
-                  Divider(),
-                  Text('Score Home: ${controller.fixtureRx.value!.score.fulltime!.home}'),
-                  Text('Score Away: ${controller.fixtureRx.value!.score.fulltime!.away!}'),
-                  Divider(),
-                  Text('Events:'),
-                ]),
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    _header(),
+                    Expanded(
+                      child: Container(
+                        margin: const EdgeInsets.only(top: 20),
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                        width: double.infinity,
+                        decoration: const BoxDecoration(
+                          color: AppColors.darkGray1,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(
+                              20,
+                            ),
+                          ),
+                        ),
+                        child: Column(
+                          children: [
+                            const SizedBox(height: 10),
+                            Expanded(
+                                child: ListView.builder(
+                              itemCount: controller.homeTeamStat.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 6.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          controller.homeTeamStat[index].value == null
+                                              ? ' - '
+                                              : controller.homeTeamStat[index].value.toString(),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          controller.homeTeamStat[index].type ?? '',
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          controller.awayTeamStat[index].value == null
+                                              ? ' - '
+                                              : controller.awayTeamStat[index].value.toString(),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ))
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
         ));
   }
-}
 
-// @override
-// Widget build(BuildContext context) {
-//   return Scaffold(
-//     appBar: AppBar(
-//       title: const Text("Detail"),
-//       centerTitle: true,
-//       elevation: 0,
-//     ),
-//     body: Obx(() {
-//       if (gameController.gameInformation.value == null) {
-//         return const Center(child: CircularProgressIndicator());
-//       } else {
-//         return SingleChildScrollView(
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//               Padding(
-//                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
-//                 child: Row(
-//                   children: [
-//                     Expanded(
-//                       flex: 2,
-//                       child: _buildTeamInfo(
-//                         gameController.gameInformation.value!.homeTeamImage,
-//                         gameController.gameInformation.value!.homeTeamName,
-//                         gameController.gameInformation.value!.homeTeamColor,
-//                         gameController.gameInformation.value!.homeTeamFontColor,
-//                       ),
-//                     ),
-//                     Expanded(
-//                         child: Text(
-//                       gameController.matchRx.value!.result.toString(),
-//                       style: Get.theme.textTheme.headlineMedium!.copyWith(letterSpacing: 4),
-//                       textAlign: TextAlign.center,
-//                     )),
-//                     Expanded(
-//                       flex: 2,
-//                       child: _buildTeamInfo(
-//                         gameController.gameInformation.value!.awayTeamImage,
-//                         gameController.gameInformation.value!.awayTeamName,
-//                         gameController.gameInformation.value!.awayTeamColor,
-//                         gameController.gameInformation.value!.awayTeamFontColor,
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//               const SizedBox(height: 20),
-//               Container(
-//                 padding: const EdgeInsets.all(16),
-//                 width: Get.width,
-//                 height: Get.height,
-//                 decoration: BoxDecoration(
-//                     borderRadius: BorderRadius.circular(20), color: AppColors.darkGray2),
-//                 child: Column(
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   children: [
-//                     Row(
-//                       children: [
-//                         Flexible(
-//                           child: Column(
-//                             crossAxisAlignment: CrossAxisAlignment.start,
-//                             children: [
-//                               Text(
-//                                   'Stadium: ${gameController.gameInformation.value!.stadiumName}'),
-//                               const SizedBox(height: 5),
-//                               Text('Date: ${gameController.gameInformation.value!.fulldate}'),
-//                               const SizedBox(height: 5),
-//                               Text(
-//                                   'Competition: ${gameController.gameInformation.value!.competitionName}'),
-//                               const SizedBox(height: 5),
-//                               Text(
-//                                   'Round: ${gameController.gameInformation.value!.competitionRound}'),
-//                               const SizedBox(height: 40),
-//                             ],
-//                           ),
-//                         )
-//                       ],
-//                     ),
-//                     Row(
-//                       crossAxisAlignment: CrossAxisAlignment.end,
-//                       children: [
-//                         Image.network(
-//                           gameController.gameInformation.value!.refereeImage,
-//                           height: 120,
-//                         ),
-//                         const SizedBox(width: 20),
-//                         Text('Referee \n${gameController.gameInformation.value!.refereeName}',
-//                             style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-//                       ],
-//                     ),
-//                     const SizedBox(height: 20),
-//                   ],
-//                 ),
-//               ),
-//             ],
-//           ),
-//         );
-//       }
-//     }),
-//   );
-// }
-//
-// Widget _buildTeamInfo(String imageUrl, String teamName, String bgColor, String fontColor) {
-//   return Column(
-//     crossAxisAlignment: CrossAxisAlignment.center,
-//     children: [
-//       Image.network(imageUrl),
-//       Container(
-//         padding: const EdgeInsets.all(8.0),
-//         child: Text(
-//           teamName,
-//           style: const TextStyle(
-//             fontSize: 16,
-//           ),
-//           textAlign: TextAlign.center,
-//         ),
-//       ),
-//     ],
-//   );
-// }
+  Widget _header() {
+    return Column(
+      children: [
+        Center(
+          child: Container(
+            margin: const EdgeInsets.symmetric(
+              vertical: 20,
+              horizontal: 25,
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            color: AppColors.white.withOpacity(0.1),
+            child: Text(
+              controller.fixtureRx.value == null
+                  ? ''
+                  : controller.fixtureRx.value!.league.name.toUpperCase(),
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            children: [
+              Expanded(
+                flex: 2,
+                child: Column(
+                  children: [
+                    Container(
+                      width: 90,
+                      height: 90,
+                      padding: const EdgeInsets.all(8),
+                      child: Image.network(
+                        controller.fixtureRx.value!.teams.home!.logo!,
+                      ),
+                    ),
+                    Text(controller.fixtureRx.value!.teams.home!.name)
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      controller.fixtureRx.value!.score.fulltime!.home == null
+                          ? ' - '
+                          : controller.fixtureRx.value!.score.fulltime!.home.toString(),
+                      style: Get.theme.textTheme.headlineSmall,
+                      textAlign: TextAlign.center,
+                    ),
+                    Text(
+                      ' : ',
+                      style: Get.theme.textTheme.headlineSmall,
+                    ),
+                    Text(
+                      controller.fixtureRx.value!.score.fulltime!.away == null
+                          ? ' - '
+                          : controller.fixtureRx.value!.score.fulltime!.away.toString(),
+                      style: Get.theme.textTheme.headlineSmall,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Column(
+                  children: [
+                    Container(
+                        width: 90,
+                        height: 90,
+                        padding: const EdgeInsets.all(8),
+                        child: Image.network(controller.fixtureRx.value!.teams.away!.logo!)),
+                    Text(controller.fixtureRx.value!.teams.away!.name)
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}

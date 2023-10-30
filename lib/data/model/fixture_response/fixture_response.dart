@@ -425,12 +425,12 @@ class PlayerStatistic {
 
 @JsonSerializable()
 class Games {
-  int minutes;
-  int number;
-  String position;
-  String rating;
-  bool captain;
-  bool substitute;
+  int? minutes;
+  int? number;
+  String? position;
+  String? rating;
+  bool? captain;
+  bool? substitute;
 
   Games({
     required this.minutes,
@@ -448,8 +448,8 @@ class Games {
 
 @JsonSerializable()
 class Shots {
-  int total;
-  int on;
+  int? total;
+  int? on;
 
   Shots({
     required this.total,
@@ -482,9 +482,9 @@ class GoalsPlayer {
 
 @JsonSerializable()
 class Passes {
-  int total;
-  int key;
-  String accuracy;
+  int? total;
+  int? key;
+  String? accuracy;
 
   Passes({
     required this.total,
@@ -500,8 +500,8 @@ class Passes {
 @JsonSerializable()
 class Tackles {
   int? total;
-  int blocks;
-  int interceptions;
+  int? blocks;
+  int? interceptions;
 
   Tackles({
     this.total,
@@ -516,8 +516,8 @@ class Tackles {
 
 @JsonSerializable()
 class Duels {
-  int total;
-  int won;
+  int? total;
+  int? won;
 
   Duels({
     required this.total,
@@ -531,8 +531,8 @@ class Duels {
 
 @JsonSerializable()
 class Dribbles {
-  int attempts;
-  int success;
+  int? attempts;
+  int? success;
   int? past;
 
   Dribbles({
@@ -548,8 +548,8 @@ class Dribbles {
 
 @JsonSerializable()
 class Fouls {
-  int drawn;
-  int committed;
+  int? drawn;
+  int? committed;
 
   Fouls({
     required this.drawn,
@@ -580,9 +580,9 @@ class Cards {
 class Penalty {
   int? won;
   int? committed;
-  int scored;
-  int missed;
-  int saved;
+  int? scored;
+  int? missed;
+  int? saved;
 
   Penalty({
     this.won,

@@ -23,11 +23,12 @@ class HomeController extends GetxController {
   }
 
   Future<void> fetchMatches({required DateTime date}) async {
-    String formattedDate = DateFormat('yyyy-MM-dd').format(dateTime);
+    String formattedDate = DateFormat('yyyy-MM-dd').format(date);
 
     final List<FixtureItem> fetchedFixtures = await _apiDataSource.fetchMatchesByDate(
         date: formattedDate);
     fixtures.value = fetchedFixtures;
+    update();
   }
 
 

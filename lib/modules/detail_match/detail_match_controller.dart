@@ -8,6 +8,8 @@ class  DetailMatchController extends  GetxController {
   final ApiDataSource _apiDataSource = ApiDataSource();
   final Rx<GameInformationModel?> gameInformation = Rx(null) ;
   final Rx<FixtureDetail?> fixtureRx = Rx(null);
+  final RxList<StatisticDetail> homeTeamStat = RxList.empty();
+  final RxList<StatisticDetail> awayTeamStat = RxList.empty();
   final RxList<Event> eventList = RxList.empty();
   final RxList<PlayerStatistic> playerStatisticList = RxList.empty();
 final RxInt fixtureId  = 0.obs;
@@ -29,9 +31,23 @@ final RxInt fixtureId  = 0.obs;
   Future<void> fetchGameInformation() async {
     isLoading.value = true;
 
-    final fixtureDetail = await _apiDataSource.getFixtureDetailById(fixtureId: fixtureId.value.toString());
-    print(fixtureDetail);
-    fixtureRx.value = fixtureDetail;
+    try {
+      print('Fetching details for fixtureId: $fixtureId');
+      final fixtureDetail = await _apiDataSource.getFixtureDetailById(fixtureId: fixtureId.value.toString());
+      print('Fetched statistics: ${fixtureDetail?.statistics}');      fixtureRx.value = fixtureDetail;
+      if(fixtureDetail?.statistics != null && fixtureDetail!.statistics.length >= 2) {
+
+
+        homeTeamStat.value = fixtureDetail.statistics[0].statistics;
+        awayTeamStat.value = fixtureDetail.statistics[1].statistics;
+
+      }
+    } catch (e) {
+      print('Error fetching game information: $e');
+    } finally {
       isLoading.value = false;
+    }
   }
+
+
 }
