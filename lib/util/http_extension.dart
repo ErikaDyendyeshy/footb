@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:football/data/model/to_json_interface.dart';
@@ -75,7 +76,7 @@ extension GetConnectExtension on GetConnect {
 
   void _logResponse(Response response) {
     // ignore: avoid_print
-    print(
+    log(
         '${response.request?.method.toUpperCase()} ${response.request?.url} ${response.statusCode}\n${response.bodyString}');
   }
 

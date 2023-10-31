@@ -293,22 +293,6 @@ class FixtureDetail {
   Map<String, dynamic> toJson() => _$FixtureDetailToJson(this);
 }
 
-
-
-// @JsonSerializable()
-// class Score {
-//   String halftime;
-//   String fulltime;
-//   String extratime;
-//   String penalty;
-//
-//   Score({required this.halftime, required this.fulltime, required this.extratime, required this.penalty});
-//
-//   factory Score.fromJson(Map<String, dynamic> json) => _$ScoreFromJson(json);
-//
-//   Map<String, dynamic> toJson() => _$ScoreToJson(this);
-// }
-
 @JsonSerializable()
 class Event {
   int? timeElapsed;
@@ -596,6 +580,9 @@ class Penalty {
 
   Map<String, dynamic> toJson() => _$PenaltyToJson(this);
 }
+
+
+
 
 
 

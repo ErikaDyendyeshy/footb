@@ -21,8 +21,27 @@ class DetailMatchPage extends GetView<DetailMatchController> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   _header(),
+                  TabBar(
+                    controller: controller.tabController,
+                    tabs: [
+                      Tab(text: 'Statistics'),
+                      Tab(text: 'Linuaups'),
+                      Tab(text: 'Tab 3'),
 
-                  _buildStatisticList(),
+                    ],
+                  ),
+                  Expanded(
+                    child: TabBarView(
+                      controller: controller.tabController,
+                      children: [
+                        _buildStatisticList(),
+                        Placeholder(),
+                        Placeholder(),
+
+                      ],
+                    ),
+                  ),
+
                 ],
               ),
       ),
