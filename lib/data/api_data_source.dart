@@ -37,7 +37,7 @@ class ApiDataSource {
     final Map<String, dynamic> query = {
       'id': fixtureId
     };
-    final response = await _getConnect.getRequest(url:'/v3/fixtures', query: query); // Replace with your endpoint path
+    final response = await _getConnect.getRequest(url:'/v3/fixtures', query: query);
 
     if (response.status.hasError) {
       return Future.error(response.statusText!);

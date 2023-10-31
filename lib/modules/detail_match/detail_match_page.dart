@@ -23,7 +23,7 @@ class DetailMatchPage extends GetView<DetailMatchController> {
                   _header(),
                   TabBar(
                     controller: controller.tabController,
-                    tabs: [
+                    tabs: const [
                       Tab(text: 'Statistics'),
                       Tab(text: 'Linuaups'),
                       Tab(text: 'Tab 3'),
@@ -35,8 +35,8 @@ class DetailMatchPage extends GetView<DetailMatchController> {
                       controller: controller.tabController,
                       children: [
                         _buildStatisticList(),
-                        Placeholder(),
-                        Placeholder(),
+                        const Placeholder(),
+                        const Placeholder(),
 
                       ],
                     ),

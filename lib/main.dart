@@ -58,7 +58,7 @@ void main() async {
         ),
         GetPage(
           name: '/detail_match',
-          page: () =>  DetailMatchPage(),
+          page: () =>  const DetailMatchPage(),
           binding: DetailMatchBinding(),
         ),
       ],
