@@ -11,7 +11,6 @@ class DetailMatchController extends GetxController with GetSingleTickerProviderS
   final Rx<FixtureDetail?> fixtureRx = Rx(null);
   final RxList<StatisticDetail> homeTeamStat = RxList.empty();
   final RxList<StatisticDetail> awayTeamStat = RxList.empty();
-  final RxList<PlayerStatistic> playerStatisticList = RxList.empty();
   late TabController tabController;
   final RxInt fixtureId = 0.obs;
   final RxBool isLoading = true.obs;
@@ -44,6 +43,7 @@ class DetailMatchController extends GetxController with GetSingleTickerProviderS
       if (fixtureDetail?.statistics != null && fixtureDetail!.statistics.length >= 2) {
         homeTeamStat.value = fixtureDetail.statistics[0].statistics;
         awayTeamStat.value = fixtureDetail.statistics[1].statistics;
+
       }
     } catch (e) {
       print('Error fetching game information: $e');

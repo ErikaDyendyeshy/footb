@@ -76,7 +76,7 @@ extension GetConnectExtension on GetConnect {
 
   void _logResponse(Response response) {
     // ignore: avoid_print
-    log(
+    print(
         '${response.request?.method.toUpperCase()} ${response.request?.url} ${response.statusCode}\n${response.bodyString}');
   }
 

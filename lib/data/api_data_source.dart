@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:football/const.dart';
 import 'package:football/data/model/fixture_response/fixture_response.dart';
+import 'package:football/data/model/league.dart';
 import 'package:football/util/http_extension.dart';
 import 'package:get/get.dart';
 
@@ -22,8 +23,10 @@ class ApiDataSource {
   Future<List<FixtureItem>> fetchMatchesByDate({ required String date}) async {
 
     final Map<String, dynamic> query = {
-      'date': date
+      'date': date,
     };
+
+
     final Response response = await _getConnect.getRequest(url: '/v3/fixtures', query: query);
     if (response.statusCode == 200) {
       final FixtureResponse fixtureResponse = FixtureResponse.fromJson(jsonDecode(response.bodyString!));
@@ -45,6 +48,19 @@ class ApiDataSource {
       if (response.body != null) {
         final data = json.decode(response.bodyString!);
         return FixtureDetail.fromJson(data['response'][0]);
+      }
+    }
+  }
+
+  Future<LeagueData?> fetchLeagues() async {
+    final response = await _getConnect.getRequest(url:'/v3/leagues',);
+
+    if (response.status.hasError) {
+      return Future.error(response.statusText!);
+    } else {
+      if (response.body != null) {
+
+        return LeagueData.fromJson(response.body);
       }
     }
   }
@@ -91,3 +107,4 @@ class ApiDataSource {
   //   });
   // }
 }
+

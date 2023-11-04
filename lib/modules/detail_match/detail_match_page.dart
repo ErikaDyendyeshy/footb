@@ -21,27 +21,7 @@ class DetailMatchPage extends GetView<DetailMatchController> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   _header(),
-                  TabBar(
-                    controller: controller.tabController,
-                    tabs: const [
-                      Tab(text: 'Statistics'),
-                      Tab(text: 'Linuaups'),
-                      Tab(text: 'Tab 3'),
-
-                    ],
-                  ),
-                  Expanded(
-                    child: TabBarView(
-                      controller: controller.tabController,
-                      children: [
-                        _buildStatisticList(),
-                        const Placeholder(),
-                        const Placeholder(),
-
-                      ],
-                    ),
-                  ),
-
+                  _buildStatisticList(),
                 ],
               ),
       ),
@@ -87,7 +67,8 @@ class DetailMatchPage extends GetView<DetailMatchController> {
                         controller.fixtureRx.value!.teams.home!.logo!,
                       ),
                     ),
-                    Text(controller.fixtureRx.value!.teams.home!.name)
+                    Text(controller.fixtureRx.value!.teams.home!.name,
+                    textAlign: TextAlign.center,)
                   ],
                 ),
               ),
@@ -125,7 +106,8 @@ class DetailMatchPage extends GetView<DetailMatchController> {
                         height: 90,
                         padding: const EdgeInsets.all(8),
                         child: Image.network(controller.fixtureRx.value!.teams.away!.logo!)),
-                    Text(controller.fixtureRx.value!.teams.away!.name)
+                    Text(controller.fixtureRx.value!.teams.away!.name,
+                      textAlign: TextAlign.center,)
                   ],
                 ),
               ),
@@ -186,7 +168,7 @@ class DetailMatchPage extends GetView<DetailMatchController> {
 
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 6.0),
-                  child: _buildtem(index, homePercentage, awayPercentage),
+                  child: _buildItem(index, homePercentage, awayPercentage),
                 );
               },
             ))
@@ -196,7 +178,7 @@ class DetailMatchPage extends GetView<DetailMatchController> {
     );
   }
 
-  Widget _buildtem(int index, double homePercentage, double awayPercentage) {
+  Widget _buildItem(int index, double homePercentage, double awayPercentage) {
     return Row(
       children: [
         Container(

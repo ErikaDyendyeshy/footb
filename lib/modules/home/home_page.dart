@@ -26,8 +26,9 @@ class HomePage extends GetView<HomeController> {
               const SearchButtonWidget(),
               const SizedBox(height: 10),
               _calendar(),
-              const SizedBox(height: 5),
-              _list(),
+
+              const SizedBox(height: 10),
+              _matchList(),
             ],
           ),
         )
@@ -56,7 +57,6 @@ class HomePage extends GetView<HomeController> {
         todayStyle: const DayStyle(
           dayNumStyle: TextStyle(color: AppColors.white, fontSize: 18),
           borderRadius: 48.0,
-
         ),
         inactiveDayStyle: DayStyle(
           borderRadius: 48.0,
@@ -73,25 +73,26 @@ class HomePage extends GetView<HomeController> {
           borderRadius: 48.0,
           dayNumStyle: TextStyle(
             fontSize: 18.0,
-
           ),
         ),
       ),
     );
   }
 
-  Widget _list() {
+
+
+  Widget _matchList() {
     return Expanded(
       child: Obx(
-        () => controller.fixtures.isEmpty
+        () => controller.fixturesList.isEmpty
             ? Center(
                 child: Lottie.asset('assets/lottie/animation_lnupk0i3.json'),
               )
             : ListView.builder(
                 shrinkWrap: true,
-                itemCount: controller.fixtures.length,
+                itemCount: controller.fixturesList.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return _item(controller.fixtures[index]);
+                  return _item(controller.fixturesList[index]);
                 }),
       ),
     );
@@ -104,86 +105,100 @@ class HomePage extends GetView<HomeController> {
         padding: const EdgeInsets.all(16),
         margin: const EdgeInsets.symmetric(vertical: 5),
         width: Get.width,
-        height: 120,
+        height: 130,
         decoration: BoxDecoration(
           color: AppColors.darkGray2,
           borderRadius: BorderRadius.circular(16),
         ),
-        child: Row(
+        child: Column(
           children: [
-            Expanded(
-              flex: 2,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    height: 60,
-                    width: 60,
-                    decoration: BoxDecoration(
-                      color: AppColors.white,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: Image.network(match.teams.home!.logo ?? ''),
-                  ),
-                  const SizedBox(height: 10),
-                  Flexible(
-                      child: Text(
-                    match.teams.home!.name,
-                    textAlign: TextAlign.center,
-                  ))
-                ],
+            Text(
+              '${match.league!.name}, ${match.league!.country}',
+              style: const TextStyle(
+                fontWeight: FontWeight.w600,
               ),
             ),
-            Expanded(
-              flex: 1,
+
+            const SizedBox(height: 10),
+            Flexible(
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    match.score!.fulltime!.home == null
-                        ? '-'
-                        : match.score!.fulltime!.home.toString(),
-                    style: Get.theme.textTheme.headlineSmall,
-                    textAlign: TextAlign.center,
-                  ),
-                  if (match.score!.fulltime!.home != null)
-                    Text(
-                      ' : ',
-                      style: Get.theme.textTheme.headlineSmall,
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          height: 60,
+                          width: 60,
+                          decoration: BoxDecoration(
+                            color: AppColors.white,
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: Image.network(match.teams.home!.logo ?? ''),
+                        ),
+                        const SizedBox(height: 10),
+                        Flexible(
+                            child: Text(
+                          match.teams.home!.name,
+                          textAlign: TextAlign.center,
+                        ))
+                      ],
                     ),
-                  Text(
-                    match.score!.fulltime!.away == null
-                        ? '-'
-                        : match.score!.fulltime!.away.toString(),
-                    style: Get.theme.textTheme.headlineSmall,
-                    textAlign: TextAlign.center,
                   ),
-                ],
-              ),
-            ),
-            Expanded(
-              flex: 2,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    height: 60,
-                    width: 60,
-                    decoration: BoxDecoration(
-                      color: AppColors.white,
-                      borderRadius: BorderRadius.circular(50),
+                  Expanded(
+                    flex: 1,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          match.score!.fulltime!.home == null
+                              ? '-'
+                              : match.score!.fulltime!.home.toString(),
+                          style: Get.theme.textTheme.headlineSmall,
+                          textAlign: TextAlign.center,
+                        ),
+                        if (match.score!.fulltime!.home != null)
+                          Text(
+                            ' : ',
+                            style: Get.theme.textTheme.headlineSmall,
+                          ),
+                        Text(
+                          match.score!.fulltime!.away == null
+                              ? '-'
+                              : match.score!.fulltime!.away.toString(),
+                          style: Get.theme.textTheme.headlineSmall,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
                     ),
-                    child: Image.network(match.teams.away!.logo ?? ''),
                   ),
-                  const SizedBox(height: 10),
-                  Flexible(
-                    child: Text(
-                      match.teams.away!.name,
-                      textAlign: TextAlign.center,
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          height: 60,
+                          width: 60,
+                          decoration: BoxDecoration(
+                            color: AppColors.white,
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: Image.network(match.teams.away!.logo ?? ''),
+                        ),
+                        const SizedBox(height: 10),
+                        Flexible(
+                          child: Text(
+                            match.teams.away!.name,
+                            textAlign: TextAlign.center,
+                          ),
+                        )
+                      ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
