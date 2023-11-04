@@ -44,39 +44,37 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBigGtzjHkshF-flVRoL51LvUduwW6hnpA',
-    appId: '1:137233550881:web:d20cc32fbf471483e79d60',
-    messagingSenderId: '137233550881',
-    projectId: 'football-pro-479a2',
-    authDomain: 'football-pro-479a2.firebaseapp.com',
-    storageBucket: 'football-pro-479a2.appspot.com',
+    apiKey: 'AIzaSyBfmbnkKES9IOMAlUO5JBDcnUv-r0vbDvU',
+    appId: '1:456043939616:web:fc0ce54b887c886aa2b945',
+    messagingSenderId: '456043939616',
+    projectId: 'matchview-a3fb0',
+    authDomain: 'matchview-a3fb0.firebaseapp.com',
+    storageBucket: 'matchview-a3fb0.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCzLYXnkgdA-jClLCtl2NX255kgVbA8ZIQ',
-    appId: '1:137233550881:android:0515da918475f195e79d60',
-    messagingSenderId: '137233550881',
-    projectId: 'football-pro-479a2',
-    storageBucket: 'football-pro-479a2.appspot.com',
+    apiKey: 'AIzaSyDcwZ0U4zbGxWVusP11slpwPfkkD370ixs',
+    appId: '1:456043939616:android:a122bb90d8f26212a2b945',
+    messagingSenderId: '456043939616',
+    projectId: 'matchview-a3fb0',
+    storageBucket: 'matchview-a3fb0.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBHYu1bD-Dxsd7fsw9tsgpcPklZpmPssco',
-    appId: '1:137233550881:ios:df7a04c04ce6f3d9e79d60',
-    messagingSenderId: '137233550881',
-    projectId: 'football-pro-479a2',
-    storageBucket: 'football-pro-479a2.appspot.com',
-    iosClientId: '137233550881-h7cuu6436gleo8s4sbg82ubiql6ts22r.apps.googleusercontent.com',
-    iosBundleId: 'com.example.football',
+    apiKey: 'AIzaSyAXd1-Npo5YdDHDgXMXyIt6ME_7wU01zdo',
+    appId: '1:456043939616:ios:5152d9450340a5eca2b945',
+    messagingSenderId: '456043939616',
+    projectId: 'matchview-a3fb0',
+    storageBucket: 'matchview-a3fb0.appspot.com',
+    iosBundleId: 'com.matchview.app',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBHYu1bD-Dxsd7fsw9tsgpcPklZpmPssco',
-    appId: '1:137233550881:ios:1cb14fca5cda6a8de79d60',
-    messagingSenderId: '137233550881',
-    projectId: 'football-pro-479a2',
-    storageBucket: 'football-pro-479a2.appspot.com',
-    iosClientId: '137233550881-h9qlsrc1fnpnj7jcf9k2v1urvd770ci2.apps.googleusercontent.com',
+    apiKey: 'AIzaSyAXd1-Npo5YdDHDgXMXyIt6ME_7wU01zdo',
+    appId: '1:456043939616:ios:86b87ea659a5311aa2b945',
+    messagingSenderId: '456043939616',
+    projectId: 'matchview-a3fb0',
+    storageBucket: 'matchview-a3fb0.appspot.com',
     iosBundleId: 'com.example.football.RunnerTests',
   );
 }

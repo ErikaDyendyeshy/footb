@@ -1,43 +1,26 @@
 {
   "project_info": {
-    "project_number": "137233550881",
-    "project_id": "football-pro-479a2",
-    "storage_bucket": "football-pro-479a2.appspot.com"
+    "project_number": "456043939616",
+    "project_id": "matchview-a3fb0",
+    "storage_bucket": "matchview-a3fb0.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:137233550881:android:0515da918475f195e79d60",
+        "mobilesdk_app_id": "1:456043939616:android:a122bb90d8f26212a2b945",
         "android_client_info": {
-          "package_name": "com.example.football"
+          "package_name": "com.matchview.app"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "137233550881-jo4of0ng6bgijn2etih3tktu6c5b9lo1.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCzLYXnkgdA-jClLCtl2NX255kgVbA8ZIQ"
+          "current_key": "AIzaSyDcwZ0U4zbGxWVusP11slpwPfkkD370ixs"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "137233550881-jo4of0ng6bgijn2etih3tktu6c5b9lo1.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "137233550881-h7cuu6436gleo8s4sbg82ubiql6ts22r.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.football"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
