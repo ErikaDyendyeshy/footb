@@ -42,6 +42,7 @@ class FixtureItem {
   final Teams teams;
   final Goals? goals;
   final Score? score;
+  final Periods? periods;
 
   FixtureItem({
     required this.fixture,
@@ -51,12 +52,15 @@ class FixtureItem {
     required this.teams,
     required this.goals,
     required this.score,
+    required this.periods,
   });
 
   factory FixtureItem.fromJson(Map<String, dynamic> json) => _$FixtureItemFromJson(json);
 
   Map<String, dynamic> toJson() => _$FixtureItemToJson(this);
 }
+
+
 
 @JsonSerializable()
 class Fixture {
@@ -313,6 +317,8 @@ class Event {
 
   Map<String, dynamic> toJson() => _$EventToJson(this);
 }
+
+
 
 
 @JsonSerializable()

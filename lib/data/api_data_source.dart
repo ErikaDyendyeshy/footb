@@ -20,16 +20,24 @@ class ApiDataSource {
     });
   }
 
-  Future<List<FixtureItem>> fetchMatchesByDate({ required String date}) async {
+  Future<List<FixtureItem>> fetchMatchesByDate({String? date, String? live}) async {
+    final Map<String, dynamic> query = {};
+    query.addIf(
+      date != null,
+      "date",
+      date,
+    );
 
-    final Map<String, dynamic> query = {
-      'date': date,
-    };
-
+    query.addIf(
+      live != null,
+      "live",
+      live,
+    );
 
     final Response response = await _getConnect.getRequest(url: '/v3/fixtures', query: query);
     if (response.statusCode == 200) {
-      final FixtureResponse fixtureResponse = FixtureResponse.fromJson(jsonDecode(response.bodyString!));
+      final FixtureResponse fixtureResponse =
+          FixtureResponse.fromJson(jsonDecode(response.bodyString!));
       return fixtureResponse.response;
     } else {
       throw Exception('Failed to load matches');
@@ -37,10 +45,9 @@ class ApiDataSource {
   }
 
   Future<FixtureDetail?> getFixtureDetailById({required String fixtureId}) async {
-    final Map<String, dynamic> query = {
-      'id': fixtureId
-    };
-    final response = await _getConnect.getRequest(url:'/v3/fixtures', query: query);
+    final Map<String, dynamic> query = {'id': fixtureId};
+
+    final response = await _getConnect.getRequest(url: '/v3/fixtures', query: query);
 
     if (response.status.hasError) {
       return Future.error(response.statusText!);
@@ -50,61 +57,21 @@ class ApiDataSource {
         return FixtureDetail.fromJson(data['response'][0]);
       }
     }
+    return null;
   }
 
   Future<LeagueData?> fetchLeagues() async {
-    final response = await _getConnect.getRequest(url:'/v3/leagues',);
+    final response = await _getConnect.getRequest(
+      url: '/v3/leagues',
+    );
 
     if (response.status.hasError) {
       return Future.error(response.statusText!);
     } else {
       if (response.body != null) {
-
         return LeagueData.fromJson(response.body);
       }
     }
+    return null;
   }
-
-  // Future<List<MatchDetail>> fetchMatches({required String date}) async {
-  //   final Map<String, dynamic> query = {};
-  //   query['date'] = date;
-  //   return _getConnect
-  //       .getRequest(
-  //     url: 'matches/list-by-date',
-  //     query: query,
-  //   )
-  //       .then((Response response) {
-  //     if (response.statusCode == 200) {
-  //       MatchModel matchModel = MatchModel.fromJson(jsonDecode(response.bodyString!));
-  //       return matchModel.liveMatches.values.expand((v) => v).toList();
-  //     } else {
-  //       throw Exception('Failed to load matches');
-  //     }
-  //   });
-  // }
-  //
-  // Future<UefaFiveYearRanking> fetchDataFromAPI() async {
-  //   return _getConnect
-  //       .getRequest(url: 'statistic/list-uefa-5year-rankings')
-  //       .then((Response response) {
-  //     if (response.statusCode == 200) {
-  //       return UefaFiveYearRanking.fromJson(json.decode(response.bodyString!));
-  //     } else {
-  //       throw Exception('Failed to load data');
-  //     }
-  //   });
-  // }
-
-  // Future<GameInformationModel> fetchGameInformation({required String id}) async {
-  //   final Map<String, dynamic> query = {};
-  //   query['id'] = id;
-  //   return _getConnect.getRequest(url: 'matches/get-game-information/', query: query,).then((Response response) {
-  //     if (response.statusCode == 200) {
-  //       return GameInformationModel.fromJson(json.decode(response.bodyString!)['gameInformation']);
-  //     } else {
-  //       throw Exception('Failed to load game information');
-  //     }
-  //   });
-  // }
 }
-

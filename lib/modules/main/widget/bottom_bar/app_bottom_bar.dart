@@ -34,8 +34,8 @@ class AppBottomBar extends GetView<MainController> {
               },
             ),
             _item(
-              icon: 'icon_favorite',
-              title: 'txt_statistic'.tr.capitalizeFirst!,
+              icons: Icons.radio_button_checked,
+              title: 'txt_live'.tr.capitalizeFirst!,
               select: controller.selectedPageIndex.value == 1 ? true : false,
               onTap: () {
                 controller.selectedPageIndex.value = 1;
@@ -56,9 +56,10 @@ class AppBottomBar extends GetView<MainController> {
   }
 
   Widget _item({
-    required String icon,
+    String? icon,
     required String title,
     required bool select,
+    IconData? icons,
     required Function() onTap,
   }) {
     return GestureDetector(
@@ -66,10 +67,15 @@ class AppBottomBar extends GetView<MainController> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          FSVGIconWidget(
-            icon: icon,
-            color: select ? AppColors.primary : AppColors.gray300,
-          ),
+          icon == null
+              ? Icon(
+                  icons,
+                  color: select ? AppColors.primary : AppColors.gray300,
+                )
+              : FSVGIconWidget(
+                  icon: icon,
+                  color: select ? AppColors.primary : AppColors.gray300,
+                ),
           Text(title,
               style: Get.theme.textTheme.labelMedium!
                   .copyWith(color: select ? AppColors.primary : AppColors.gray300)),

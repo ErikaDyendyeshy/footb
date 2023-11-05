@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:football/modules/home/home_binding.dart';
 import 'package:football/modules/home/home_page.dart';
+import 'package:football/modules/live_scores/live_scores_binding.dart';
+import 'package:football/modules/live_scores/live_scores_page.dart';
 import 'package:football/modules/main/main_controller.dart';
 import 'package:football/modules/main/widget/bottom_bar/app_bottom_bar.dart';
 import 'package:football/modules/profile/profile_binding.dart';
 import 'package:football/modules/profile/profile_page.dart';
-import 'package:football/modules/statistic/statistic_binding.dart';
-import 'package:football/modules/statistic/statistic_page.dart';
 import 'package:football/style/app_colors.dart';
 import 'package:get/get.dart';
 
@@ -65,9 +65,9 @@ class MainPage extends GetView<MainController> {
           ),  Navigator(
             onGenerateRoute: (routeSettings) {
               return GetPageRoute(
-                routeName: '/statistic',
-                page: () => const StatisticPage(),
-                binding: StatisticBinding(),
+                routeName: '/live_scores',
+                page: () => const LiveScoresPage(),
+                binding: LiveScoresBinding(),
               );
             },
           )  ,

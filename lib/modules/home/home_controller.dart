@@ -16,7 +16,6 @@ class HomeController extends GetxController {
     super.onInit();
     isLoading.value = true;
     fetchMatches(date: dateTime);
-    fetchLeagues();
     isLoading.value = false;
   }
 
@@ -30,17 +29,6 @@ class HomeController extends GetxController {
     update();
   }
 
-  Future<void> fetchLeagues() async {
-    leagueData.value = await _apiDataSource.fetchLeagues();
-
-  }
-
-  // void fetchMatches(DateTime dateTime) {
-  //   String formattedDate = DateFormat('yyyy-MM-dd').format(dateTime);
-  //   _apiDataSource.fetchMatches(date: formattedDate).then((List<MatchDetail> matchDetail) {
-  //     matchDetailList.value = matchDetail;
-  //   });
-  // }
 
   void openSearchPage() {
     Get.toNamed('/search');

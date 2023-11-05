@@ -1,6 +1,7 @@
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:football/data/model/fixture_response/fixture_response.dart';
+import 'package:football/modules/detail_match/detail_match_controller.dart';
 import 'package:football/modules/home/home_controller.dart';
 import 'package:football/modules/home/widget/search_button_widget.dart';
 import 'package:football/style/app_colors.dart';
@@ -26,7 +27,6 @@ class HomePage extends GetView<HomeController> {
               const SearchButtonWidget(),
               const SizedBox(height: 10),
               _calendar(),
-
               const SizedBox(height: 10),
               _matchList(),
             ],
@@ -79,8 +79,6 @@ class HomePage extends GetView<HomeController> {
     );
   }
 
-
-
   Widget _matchList() {
     return Expanded(
       child: Obx(
@@ -100,12 +98,13 @@ class HomePage extends GetView<HomeController> {
 
   Widget _item(FixtureItem match) {
     return InkWell(
-      onTap: () => Get.toNamed('/detail_match', arguments: match.fixture.id),
+      onTap: () =>
+          Get.toNamed('/detail_match', arguments: DetailMatchWrapper(matchId: match.fixture.id, liveScore: false)),
       child: Container(
         padding: const EdgeInsets.all(16),
         margin: const EdgeInsets.symmetric(vertical: 5),
         width: Get.width,
-        height: 130,
+        height: 150,
         decoration: BoxDecoration(
           color: AppColors.darkGray2,
           borderRadius: BorderRadius.circular(16),
@@ -118,7 +117,6 @@ class HomePage extends GetView<HomeController> {
                 fontWeight: FontWeight.w600,
               ),
             ),
-
             const SizedBox(height: 10),
             Flexible(
               child: Row(

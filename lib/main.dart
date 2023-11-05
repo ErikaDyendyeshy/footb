@@ -6,6 +6,8 @@ import 'package:football/modules/auth/auth_binding.dart';
 import 'package:football/modules/auth/auth_page.dart';
 import 'package:football/modules/detail_match/detail_match_binding.dart';
 import 'package:football/modules/detail_match/detail_match_page.dart';
+import 'package:football/modules/live_score_detail/live_score_detail_binding.dart';
+import 'package:football/modules/live_score_detail/live_score_detail_page.dart';
 import 'package:football/modules/main/main_binding.dart';
 import 'package:football/modules/main/main_page.dart';
 import 'package:football/modules/search/search_binding.dart';
@@ -60,6 +62,11 @@ void main() async {
           name: '/detail_match',
           page: () =>  const DetailMatchPage(),
           binding: DetailMatchBinding(),
+        ),
+        GetPage(
+          name: '/live_score_detail',
+          page: () =>  const LiveScoreDetailPage(),
+          binding: LiveScoreDetailBinding(),
         ),
       ],
     ),

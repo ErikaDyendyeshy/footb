@@ -1,29 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:football/modules/detail_match/detail_match_controller.dart';
+import 'package:football/modules/live_score_detail/live_score_detail_controller.dart';
 import 'package:football/style/app_colors.dart';
 import 'package:football/widget/f_custom_progress_indicator_widget.dart';
 import 'package:get/get.dart';
 
-class DetailMatchPage extends GetView<DetailMatchController> {
-  const DetailMatchPage({super.key});
+class LiveScoreDetailPage extends GetView<LiveScoreDetailController> {
+  const LiveScoreDetailPage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Details'),
+        title: const Text('Detail'),
         elevation: 0,
       ),
-      body: Obx(
-        () => controller.isLoading.value
-            ? const CircularProgressIndicator()
-            : Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  _header(context),
-                  _buildStatisticList(),
-                ],
-              ),
+      body: SingleChildScrollView(
+        child: Obx(
+          () => controller.isLoading.value
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Column(
+                  children: [
+                    _header(context),
+                  ],
+                ),
+        ),
       ),
     );
   }
@@ -80,40 +84,24 @@ class DetailMatchPage extends GetView<DetailMatchController> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    controller.isLive.value
-                        ? Text(
-                            controller.fixtureRx.value!.goals.home == null
-                                ? '-'
-                                : controller.fixtureRx.value!.goals.home.toString(),
-                            style: Get.theme.textTheme.headlineSmall,
-                            textAlign: TextAlign.center,
-                          )
-                        : Text(
-                            controller.fixtureRx.value!.score.fulltime!.home == null
-                                ? ' - '
-                                : controller.fixtureRx.value!.score.fulltime!.home.toString(),
-                            style: Get.theme.textTheme.headlineSmall,
-                            textAlign: TextAlign.center,
-                          ),
+                    Text(
+                      controller.fixtureRx.value!.goals.home == null
+                          ? '-'
+                          : controller.fixtureRx.value!.goals.home.toString(),
+                      style: Get.theme.textTheme.headlineSmall,
+                      textAlign: TextAlign.center,
+                    ),
                     Text(
                       ' : ',
                       style: Get.theme.textTheme.headlineSmall,
                     ),
-                    controller.isLive.value
-                        ? Text(
-                            controller.fixtureRx.value!.goals.away == null
-                                ? ' - '
-                                : controller.fixtureRx.value!.goals.away.toString(),
-                            style: Get.theme.textTheme.headlineSmall,
-                            textAlign: TextAlign.center,
-                          )
-                        : Text(
-                            controller.fixtureRx.value!.score.fulltime!.away == null
-                                ? ' - '
-                                : controller.fixtureRx.value!.score.fulltime!.away.toString(),
-                            style: Get.theme.textTheme.headlineSmall,
-                            textAlign: TextAlign.center,
-                          ),
+                    Text(
+                      controller.fixtureRx.value!.goals.away == null
+                          ? ' - '
+                          : controller.fixtureRx.value!.goals.away.toString(),
+                      style: Get.theme.textTheme.headlineSmall,
+                      textAlign: TextAlign.center,
+                    ),
                   ],
                 ),
               ),
@@ -136,12 +124,10 @@ class DetailMatchPage extends GetView<DetailMatchController> {
             ],
           ),
         ),
-        if (controller.isLive.value)
-          Text(
-            '$differenceInMinutes minutes',
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
-        const SizedBox(height: 20),
+        Text(
+          '$differenceInMinutes minutes',
+          style: Theme.of(context).textTheme.bodySmall,
+        ),
       ],
     );
   }

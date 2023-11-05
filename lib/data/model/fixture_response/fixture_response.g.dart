@@ -50,6 +50,9 @@ FixtureItem _$FixtureItemFromJson(Map<String, dynamic> json) => FixtureItem(
       score: json['score'] == null
           ? null
           : Score.fromJson(json['score'] as Map<String, dynamic>),
+      periods: json['periods'] == null
+          ? null
+          : Periods.fromJson(json['periods'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$FixtureItemToJson(FixtureItem instance) =>
@@ -61,6 +64,7 @@ Map<String, dynamic> _$FixtureItemToJson(FixtureItem instance) =>
       'teams': instance.teams,
       'goals': instance.goals,
       'score': instance.score,
+      'periods': instance.periods,
     };
 
 Fixture _$FixtureFromJson(Map<String, dynamic> json) => Fixture(
