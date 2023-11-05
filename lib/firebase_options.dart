@@ -66,7 +66,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '456043939616',
     projectId: 'matchview-a3fb0',
     storageBucket: 'matchview-a3fb0.appspot.com',
-    iosBundleId: 'com.matchview.app',
+    iosBundleId: 'com.insportapp.matchview',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(

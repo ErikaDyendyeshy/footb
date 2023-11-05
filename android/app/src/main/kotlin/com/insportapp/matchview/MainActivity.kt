@@ -1,4 +1,4 @@
-package com.example.football
+package com.insportapp.matchview
 
 import io.flutter.embedding.android.FlutterActivity
 
