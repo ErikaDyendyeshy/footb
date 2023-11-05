@@ -5,19 +5,16 @@ part 'league.g.dart';
 
 @JsonSerializable()
 class LeagueData {
-  final String get;
-  final List<String> parameters;
+  final dynamic parameters;
   final List<String> errors;
-  final int results;
-  final Paging paging;
+
+
   final List<League> response;
 
   LeagueData({
-    required this.get,
     required this.parameters,
     required this.errors,
-    required this.results,
-    required this.paging,
+
     required this.response,
   });
 
@@ -57,10 +54,10 @@ class League {
 
 @JsonSerializable()
 class LeagueDetails {
-  final int id;
-  final String name;
-  final String type;
-  final String logo;
+  final int? id;
+  final String? name;
+  final String? type;
+  final String? logo;
 
   LeagueDetails({
     required this.id,

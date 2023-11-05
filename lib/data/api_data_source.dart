@@ -1,10 +1,11 @@
 import 'dart:convert';
 
 import 'package:football/const.dart';
-import 'package:football/data/model/fixture_response/fixture_response.dart';
-import 'package:football/data/model/league.dart';
+import 'package:football/data/model/fixture_response/fixture_response.dart' hide League;
 import 'package:football/util/http_extension.dart';
 import 'package:get/get.dart';
+
+import 'model/league.dart';
 
 class ApiDataSource {
   final GetConnect _getConnect = GetConnect();
@@ -20,7 +21,7 @@ class ApiDataSource {
     });
   }
 
-  Future<List<FixtureItem>> fetchMatchesByDate({String? date, String? live}) async {
+  Future<List<FixtureItem>> fetchMatchesByDate({String? date, String? live, }) async {
     final Map<String, dynamic> query = {};
     query.addIf(
       date != null,
@@ -60,18 +61,20 @@ class ApiDataSource {
     return null;
   }
 
-  Future<LeagueData?> fetchLeagues() async {
+  Future<List<League>> fetchLeagues({required String search}) async {
+    final Map<String, dynamic> query = {
+      'search': search,
+    };
     final response = await _getConnect.getRequest(
       url: '/v3/leagues',
+      query: query,
     );
-
-    if (response.status.hasError) {
-      return Future.error(response.statusText!);
+    if (response.statusCode == 200) {
+      final LeagueData leagueData = LeagueData.fromJson(jsonDecode(response.bodyString!));
+      return leagueData.response;
     } else {
-      if (response.body != null) {
-        return LeagueData.fromJson(response.body);
-      }
+      throw Exception('Failed to load matches');
+
     }
-    return null;
   }
 }
