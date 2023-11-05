@@ -22,6 +22,9 @@ class ProfileController extends GetxController {
   void onInit() {
     super.onInit();
     fetchUserData();
+
+     getUserData(authController.user!.uid);
+
   }
 
   Future<Map<String, dynamic>?> getUserData(String uid) async {
@@ -35,6 +38,7 @@ class ProfileController extends GetxController {
       print(e);
       return null;
     }
+    return null;
   }
 
   void fetchUserData() async {
