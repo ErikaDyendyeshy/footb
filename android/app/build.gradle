@@ -27,7 +27,7 @@ if (flutterVersionName == null) {
 }
 
 android {
-    namespace "com.insportapp.matchview"
+    namespace "com.insportapp.matchview2"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 

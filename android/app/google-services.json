@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:456043939616:android:3b3de1db5d2fbe31a2b945",
+        "mobilesdk_app_id": "1:456043939616:android:4435fe7992591993a2b945",
         "android_client_info": {
-          "package_name": "com.insportapp.matchview"
+          "package_name": "com.insportapp.matchview2"
         }
       },
       "oauth_client": [],
